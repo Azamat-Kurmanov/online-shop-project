@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.gb.spring.shopprj.dto.Cart;
+import ru.gb.spring.shopprj.model.Cart;
 import ru.gb.spring.shopprj.services.CartService;
 
 @RestController
@@ -18,6 +18,16 @@ public class CartController {
     public void addToCart(@PathVariable Long id){
         System.out.println("id: " + id);
         cartService.add(id);
+    }
+
+    @GetMapping("/clear")
+    public void clearCart(){
+        cartService.clear();
+    }
+
+    @GetMapping("/remove/{id}")
+    public void removeFromCart(@PathVariable Long id){
+        cartService.remove(id);
     }
 
     @GetMapping

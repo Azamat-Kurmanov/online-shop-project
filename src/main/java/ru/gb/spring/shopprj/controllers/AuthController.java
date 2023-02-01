@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.gb.spring.shopprj.dto.JwtRequest;
 import ru.gb.spring.shopprj.dto.JwtResponse;
+import ru.gb.spring.shopprj.dto.StringResponse;
 import ru.gb.spring.shopprj.services.UserService;
 import ru.gb.spring.shopprj.utils.JwtTokenUtil;
+
+import java.security.Principal;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,4 +42,9 @@ public class AuthController {
          String token = jwtTokenUtil.generateToken(userDetails);
          return ResponseEntity.ok(new JwtResponse(token));
      }
+
+    @GetMapping("/auth_check")
+    public StringResponse authCheck(Principal principal){
+         return new StringResponse(principal.getName());
+    }
 }
