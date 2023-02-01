@@ -12,6 +12,7 @@
 <body>
     <div class="container" ng-controller="indexController">
         <h3>Список товаров</h3>
+        <div>
         <table class="table table-hover">
             <tr>
                 <td>ID</td>
@@ -26,14 +27,37 @@
                 <td>{{ product.title }}</td>
                 <td>{{ product.price }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" ng-click="showProductInfo(product.id)">Info</button>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger" ng-click="deleteProductById(product.id)">Delete</button>
+                    <button type="button" class="btn btn-primary" ng-click="addToCart(product.id)">Добавить в корзину</button>
+<!--                    <button type="button" class="btn btn-primary" ng-click="showProductInfo(product.id)">Info</button>-->
+<!--                    <button type="button" class="btn btn-danger" ng-click="deleteProductById(product.id)">Delete</button>-->
                 </td>
             </tr>
             </tbody>
         </table>
+        </div>
+        <div>
+            <h3>Корзина</h3>
+            <table class="table table-hover">
+                <tr>
+                    <td>Название</td>
+                    <td>Количество</td>
+                    <td>Цена</td>
+                    <td></td>
+                </tr>
+                <tbody>
+                <tr ng-repeat="cart in cart.items">
+                    <td>{{ cart.productTitle }}</td>
+                    <td>{{ cart.quantity }}</td>
+                    <td>{{ cart.pricePerProduct + ' x ' + cart.quantity + ' = ' + cart.price }}</td>
+                </tr>
+                <tr>
+                    <td>Итого</td>
+                    <td></td>
+                    <td>{{ cart.totalPrice }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
