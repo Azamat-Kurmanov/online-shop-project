@@ -11,7 +11,9 @@ values ('Milk', 80), ('Bread', 25), ('Cheese', 300);
 create table users(
     id bigserial primary key,
     username varchar(36) not null,
-    password varchar(80) not null
+    password varchar(80) not null,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP
 );
 
 create table roles
@@ -38,3 +40,26 @@ VALUES ('ROLE_USER'),
 INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 1),
        (2, 2);
+
+create table orders
+(
+    id          bigserial primary key,
+    user_id     bigint not null references users (id),
+    total_price int not null,
+    address     varchar(255),
+    phone       varchar(255),
+    created_at  timestamp default CURRENT_TIMESTAMP,
+    updated_at  timestamp default CURRENT_TIMESTAMP
+)
+
+create table order_items
+(
+    id                  bigserial primary key,
+    product_id          bigint not null references products (id),
+    order_id            bigint not null references orders (id),
+    quantity            int not null,
+    price_per_product   int not null,
+    price               int not null,
+    created_at          timestamp default CURRENT_TIMESTAMP,
+    updated_at          timestamp default CURRENT_TIMESTAMP
+)
