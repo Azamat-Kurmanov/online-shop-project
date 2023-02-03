@@ -1,12 +1,23 @@
+create table categories (
+    id bigserial primary key,
+    title varchar(255) unique,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP
+);
+
+insert into categories(title) values ('Food'), ('Others');
+
 create table products(
     id bigserial primary key,
     title varchar(255),
+    category_id bigint references categories (id),
     price int,
     created_at timestamp default CURRENT_TIMESTAMP,
     updated_at timestamp default CURRENT_TIMESTAMP
 );
-insert into products (title, price)
-values ('Milk', 80), ('Bread', 25), ('Cheese', 300);
+
+insert into products (title, price, category_id)
+values ('Milk', 80, 1), ('Bread', 25, 1), ('Cheese', 300, 1);
 
 create table users(
     id bigserial primary key,
@@ -50,7 +61,7 @@ create table orders
     phone       varchar(255),
     created_at  timestamp default CURRENT_TIMESTAMP,
     updated_at  timestamp default CURRENT_TIMESTAMP
-)
+);
 
 create table order_items
 (
@@ -62,4 +73,4 @@ create table order_items
     price               int not null,
     created_at          timestamp default CURRENT_TIMESTAMP,
     updated_at          timestamp default CURRENT_TIMESTAMP
-)
+);
