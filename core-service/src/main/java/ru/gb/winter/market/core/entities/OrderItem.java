@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "order_items")
 public class OrderItem {
@@ -44,4 +43,12 @@ public class OrderItem {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public OrderItem(Product product, Order order, int quantity, int pricePerProduct, int price) {
+        this.product = product;
+        this.order = order;
+        this.quantity = quantity;
+        this.pricePerProduct = pricePerProduct;
+        this.price = price;
+    }
 }

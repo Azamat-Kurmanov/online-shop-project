@@ -31,8 +31,8 @@ public class SpringConfig {
                 .csrf().disable()   //---csrf tokens в Rest не используются
                 .cors().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth_check")
-                .authenticated()
+                .requestMatchers("/auth_check").authenticated()
+                .requestMatchers("/api/v1/orders").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //---Сесии в Rest не используются

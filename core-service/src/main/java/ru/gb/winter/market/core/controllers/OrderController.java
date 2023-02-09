@@ -23,6 +23,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createOrder(Principal principal){
-        User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new RuntimeException());
+        User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+        orderService.createOrder(user);
     }
 }
