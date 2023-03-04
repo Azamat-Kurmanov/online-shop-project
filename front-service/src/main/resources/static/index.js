@@ -1,7 +1,7 @@
 angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage) {
 
     $scope.tryToAuth = function(){
-        const url = 'http://localhost:8189/winter/auth'
+        const url = 'http://localhost:5555/auth/auth'
         $http.post(url, $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
@@ -33,19 +33,18 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         }
     }
 
-    $scope.checkAuth = function(){
-        const url = 'http://localhost:8189/winter/auth_check';
-        $http.get(url).then(function (response) {
-            console.log('AuthCheck: ' + response.data.value);
-        });
-    }
+    // $scope.  = function(){
+    //     const url = 'http://localhost:5555/core/auth_check';
+    //     $http.get(url).then(function (response) {
+    //         console.log('AuthCheck: ' + response.data.value);
+    //     });
+    // }
 
     $scope.initLoader = function(){
         if ($localStorage.winterMarketUser){
             try {
                 let jwt = $localStorage.winterMarketUser.token;
                 let payload = JSON.parse(atab(jwt.split('.')[1]));
-                console.log('payload: ' + JSON.stringify(payload));
                 let currentTime = parseInt(new Date().getTime() / 1000);
                 if (currentTime > payload.exp) {
                     console.log('Token is expired!!!');
@@ -53,35 +52,35 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
                     $http.defaults.headers.common.Authorization = '';
                 }
             } catch (e) {
-
             }
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.winterMarketUser.token;
         }
     }
 
     $scope.loadProducts = function() {
-        const url = 'http://localhost:8189/winter/api/v1/products';
+        const url = 'http://localhost:5555/core/api/v1/products';
         $http.get(url).then(function (response) {
             $scope.productList = response.data;
         });
     }
 
     $scope.createOrder = function() {
-        const url = 'http://localhost:8189/winter/api/v1/orders';
+        const url = 'http://localhost:5555/core/api/v1/orders';
         $http.post(url).then(function (response) {
             console.log("Заказ оформлен");
+            $scope.loadCart();
         });
     }
 
     $scope.showProductInfo = function (productId){
-        const url = 'http://localhost:8189/winter/api/v1/products/'+ productId;
+        const url = 'http://localhost:5555/core/api/v1/products/'+ productId;
         $http.get(url).then(function (response) {
             alert(JSON.stringify(response.data));
         })
     }
 
     $scope.removeFromCart = function (productId){
-        const url = 'http://localhost:8190/winter-carts/api/v1/cart/remove/'+ productId;
+        const url = 'http://localhost:5555/cart/api/v1/cart/remove/'+ productId;
         $http.get(url).then(function (response) {
             if (response.status==200){
                 $scope.loadCart();
@@ -90,7 +89,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     }
 
     $scope.clearCart = function (){
-        const url = 'http://localhost:8190/winter-carts/api/v1/cart/clear';
+        const url = 'http://localhost:5555/cart/api/v1/cart/clear';
         $http.get(url).then(function (response) {
             if (response.status==200){
                 $scope.loadCart();
@@ -99,14 +98,14 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     }
 
     $scope.addToCart = function (productId) {
-        const url = 'http://localhost:8190/winter-carts/api/v1/cart/add/'+ productId;
+        const url = 'http://localhost:5555/cart/api/v1/cart/add/'+ productId;
         $http.get(url).then(function (response) {
             $scope.loadCart();
         })
     }
 
     $scope.loadCart = function () {
-        const url = 'http://localhost:8190/winter-carts/api/v1/cart';
+        const url = 'http://localhost:5555/cart/api/v1/cart';
         $http.get(url).then(function (response) {
             $scope.cart = response.data;
         });

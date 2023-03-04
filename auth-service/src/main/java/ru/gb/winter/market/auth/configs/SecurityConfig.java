@@ -1,4 +1,4 @@
-package ru.gb.winter.market.core.configs;
+package ru.gb.winter.market.auth.configs;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -12,13 +12,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @Configuration
-public class SpringConfig {
-
-    private final JwtRequestFilter jwtRequestFilter;
+public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
@@ -31,8 +28,6 @@ public class SpringConfig {
                 .csrf().disable()   //---csrf tokens в Rest не используются
                 .cors().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth_check").authenticated()
-                .requestMatchers("/api/v1/orders").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //---Сесии в Rest не используются
@@ -41,9 +36,7 @@ public class SpringConfig {
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))    //---Если Пользователь со статусом гость то будет ошибка 401
-                .and()
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .and().build();
     }
 
     @Bean

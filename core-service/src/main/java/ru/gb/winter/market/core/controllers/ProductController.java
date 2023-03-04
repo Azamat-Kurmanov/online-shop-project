@@ -6,7 +6,6 @@ import ru.gb.winter.market.api.dto.ProductDto;
 import ru.gb.winter.market.api.dto.ResourceNotFoundException;
 import ru.gb.winter.market.core.convertors.ProductConvertor;
 import ru.gb.winter.market.core.entities.Product;
-import ru.gb.winter.market.core.services.CategoryService;
 import ru.gb.winter.market.core.services.ProductService;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class ProductController {
     private final ProductService productService;
     private final ProductConvertor productConvertor;
