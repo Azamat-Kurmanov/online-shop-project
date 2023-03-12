@@ -31,14 +31,14 @@ spring:
             - StripPrefix=1
             - PrefixPath=/winter-market-carts
             - JwtAuthFilter
-        - id: auth-service
-          uri: http://localhost:8188
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
-            - PrefixPath=/winter-market-auth
-            - JwtAuthFilter
+#        - id: auth-service
+#          uri: http://localhost:8188
+#          predicates:
+#            - Path=/auth/**
+#          filters:
+#            - StripPrefix=1
+#            - PrefixPath=/winter-market-auth
+#            - JwtAuthFilter
 
 jwt:
   secret: ads9f8asdofRTFOZEJRTO#$RTJGEDjflskdtoe4i5rjgslrituoiDFGSD#$gt4tgsefSRFDG

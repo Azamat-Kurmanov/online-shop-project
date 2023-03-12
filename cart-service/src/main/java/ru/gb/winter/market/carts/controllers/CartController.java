@@ -7,8 +7,8 @@ import ru.gb.winter.market.carts.convertors.CartConverter;
 import ru.gb.winter.market.carts.services.CartService;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/cart")
+@RequiredArgsConstructor
 //@CrossOrigin("*")
 public class CartController {
     private final CartService cartService;

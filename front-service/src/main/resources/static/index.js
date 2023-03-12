@@ -1,10 +1,12 @@
 angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage) {
 
     $scope.tryToAuth = function(){
-        const url = 'http://localhost:5555/auth/auth'
+        // const url = 'http://localhost:5555/auth/auth'
+        const url = 'http://localhost:5555/core/auth'
         $http.post(url, $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
+                    console.log('response.data.token: ' + JSON.stringify(response.data.token));
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.winterMarketUser = {username: $scope.user.username, token: response.data.token};
 
@@ -33,7 +35,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         }
     }
 
-    // $scope.  = function(){
+    // $scope.authCheck = function(){
     //     const url = 'http://localhost:5555/core/auth_check';
     //     $http.get(url).then(function (response) {
     //         console.log('AuthCheck: ' + response.data.value);
@@ -43,8 +45,11 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     $scope.initLoader = function(){
         if ($localStorage.winterMarketUser){
             try {
+                console.log('$localStorage.winterMarketUser: ' + JSON.stringify($localStorage.winterMarketUser));
                 let jwt = $localStorage.winterMarketUser.token;
+                console.log('jwt: ' + JSON.stringify(jwt));
                 let payload = JSON.parse(atab(jwt.split('.')[1]));
+                console.log('payload: ' + JSON.stringify(payload))
                 let currentTime = parseInt(new Date().getTime() / 1000);
                 if (currentTime > payload.exp) {
                     console.log('Token is expired!!!');
@@ -53,6 +58,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
                 }
             } catch (e) {
             }
+            console.log('$localStorage.winterMarketUser.token: ' + JSON.stringify($localStorage.winterMarketUser.token));
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.winterMarketUser.token;
         }
     }
@@ -60,6 +66,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     $scope.loadProducts = function() {
         const url = 'http://localhost:5555/core/api/v1/products';
         $http.get(url).then(function (response) {
+            console.log('products_response: ' + JSON.stringify(response));
             $scope.productList = response.data;
         });
     }
