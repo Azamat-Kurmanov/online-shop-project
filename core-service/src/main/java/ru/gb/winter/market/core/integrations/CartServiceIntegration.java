@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.gb.winter.market.api.dto.CartDto;
-import ru.gb.winter.market.api.dto.ProductDto;
 
 @Component
 @RequiredArgsConstructor

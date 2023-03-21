@@ -1,6 +1,5 @@
 package ru.gb.winter.market.core.services;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.winter.market.api.dto.CartDto;
@@ -9,6 +8,7 @@ import ru.gb.winter.market.core.entities.OrderItem;
 import ru.gb.winter.market.core.integrations.CartServiceIntegration;
 import ru.gb.winter.market.core.repositories.OrderRepository;
 
+import javax.transaction.Transactional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,5 +33,6 @@ public class OrderService {
             )
         ).collect(Collectors.toList()));
         orderRepository.save(order);
+        cartServiceIntegration.clear();
     }
 }

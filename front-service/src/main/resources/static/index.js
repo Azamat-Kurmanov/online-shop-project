@@ -1,8 +1,8 @@
 angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage) {
 
     $scope.tryToAuth = function(){
-        // const url = 'http://localhost:5555/auth/auth'
-        const url = 'http://localhost:5555/core/auth'
+        const url = 'http://localhost:5555/auth/auth'
+        // const url = 'http://localhost:5555/core/auth'
         $http.post(url, $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {

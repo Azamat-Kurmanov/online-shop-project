@@ -1,12 +1,12 @@
 package ru.gb.winter.market.carts.services;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.winter.market.api.dto.ProductDto;
-import ru.gb.winter.market.api.dto.ResourceNotFoundException;
 import ru.gb.winter.market.carts.integrations.ProductServiceIntegration;
 import ru.gb.winter.market.carts.model.Cart;
+
+import javax.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor

@@ -12,7 +12,11 @@ import ru.gb.winter.market.api.dto.ResourceNotFoundException;
 @RequiredArgsConstructor
 public class ProductServiceIntegration {
     private final WebClient productServiceWebClient;
+    /*private final RestTemplate restTemplate;
 
+    public Optional<ProductDto> getProductById(Long id){
+        return Optional.ofNullable(restTemplate.getForObject("http://localhost:8189/winter/api/v1/products/"+id, ProductDto.class));
+    }*/
     public ProductDto getProductById(Long id) {
         return productServiceWebClient.get()
                 .uri("/api/v1/products/" + id)

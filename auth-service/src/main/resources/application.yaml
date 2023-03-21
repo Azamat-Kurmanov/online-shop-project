@@ -6,7 +6,7 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./users;MODE=PostgreSQL
-    username: azamat
+    username: sa
     password:
   jpa:
     show-sql: true
@@ -18,6 +18,9 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
+  flyway:
+    locations:
+      classpath:db.migration
 jwt:
   secret: ads9f8asdofRTFOZEJRTO#$RTJGEDjflskdtoe4i5rjgslrituoiDFGSD#$gt4tgsefSRFDG
   lifetime: 36000000

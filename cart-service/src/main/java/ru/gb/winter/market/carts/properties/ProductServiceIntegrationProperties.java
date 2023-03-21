@@ -2,8 +2,9 @@ package ru.gb.winter.market.carts.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
 
-//@ConstructorBinding
+@ConstructorBinding
 @ConfigurationProperties(prefix = "integrations.product-service")
 @Data
 public class ProductServiceIntegrationProperties {

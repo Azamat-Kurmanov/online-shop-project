@@ -1,6 +1,5 @@
 package ru.gb.winter.market.auth.services;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +11,7 @@ import ru.gb.winter.market.auth.entities.Role;
 import ru.gb.winter.market.auth.entities.User;
 import ru.gb.winter.market.auth.repositories.UserRepository;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
